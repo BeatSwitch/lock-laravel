@@ -184,7 +184,7 @@ class UserManagementController extends BaseController
 ## Maintainer
 
 This package is currently maintained by [Dries Vints](https://github.com/driesvints).  
-If you have any questions please don't hesitate to [ask them in an issue](https://github.com/BeatSwitch/lock/issues/new).
+If you have any questions please don't hesitate to [ask them in an issue](https://github.com/BeatSwitch/lock-laravel/issues/new).
 
 ## Contributing
 
