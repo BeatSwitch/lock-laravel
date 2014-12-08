@@ -1,5 +1,10 @@
 # Lock - Laravel Driver
 
+[![Build Status](https://img.shields.io/travis/BeatSwitch/lock-laravel/master.svg?style=flat-square)](https://travis-ci.org/BeatSwitch/lock-laravel)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](license.md)
+[![Packagist Version](https://img.shields.io/packagist/v/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
+[![Total Downloads](https://img.shields.io/packagist/dt/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
+
 Lock is a flexible, driver based Acl package for PHP 5.4+.
 
 This package is a Laravel driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info.
