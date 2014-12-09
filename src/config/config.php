@@ -1,7 +1,7 @@
 <?php
 
-use BeatSwitch\Lock\Callers\Caller;
 use BeatSwitch\Lock\Drivers\ArrayDriver;
+use BeatSwitch\Lock\Lock;
 use BeatSwitch\Lock\Manager;
 
 return [
@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'permissions' => function (Manager $manager, Caller $caller) {
+    'permissions' => function (Manager $manager, Lock $caller) {
         // Set your configuration here.
         // $manager->alias('manage', ['create', 'read', 'update', 'delete']);
         // $manager->setRole('user', 'guest');
