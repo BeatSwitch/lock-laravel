@@ -11,6 +11,7 @@ All notable changes to Lock - Laravel will be documented in this file. This file
 ### Fixed
 
 - Use new `createFromData` method to support data objects
+- Fix a bug where the default driver couldn't be changed
 
 ## 1.0.0-alpha.2 - 2014-12-09
 
