@@ -1,0 +1,23 @@
+filter:
+  paths: [src/*]
+  excluded_paths: [tests/*]
+tools:
+  php_analyzer: true
+  php_code_sniffer:
+    config:
+      standard:
+        "PSR2"
+checks:
+  php:
+    code_rating: true
+build:
+  dependencies:
+    override:
+     - composer install --no-interaction --prefer-source
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit --verbose --coverage-clover=coverage.xml'
+        coverage:
+          file: 'coverage.xml'
+          format: 'php-clover'
