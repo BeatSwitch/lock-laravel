@@ -11,8 +11,6 @@ Lock is a flexible, driver based Acl package for PHP 5.4+.
 
 This package is a Laravel driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info.
 
-> **Warning:** This package is currently in alpha stage. This means that there is no guarantee that the current structure, contracts, terminology and/or implementations will stay the same until the package hits stable. Please do not use this in production until a stable release it out.
-
 ## Table of Contents
 
 - [Installation](#installation)
@@ -194,7 +192,7 @@ Please see [the contributing file](contributing.md) for details.
 
 ## Changelog
 
-You can see a list of changes for each release in [our changelog file](changelog.md).
+You can see a list of changes for each release in [the changelog file](changelog.md).
 
 ## License
 
