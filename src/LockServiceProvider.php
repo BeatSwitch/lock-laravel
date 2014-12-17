@@ -13,8 +13,6 @@ class LockServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('beatswitch/lock-laravel', 'lock-laravel', __DIR__);
-
         // Here we should execute the permissions callback from the config file so all
         // the roles and aliases get registered and if we're using the array driver,
         // all of our permissions get set beforehand.
@@ -33,6 +31,8 @@ class LockServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->package('beatswitch/lock-laravel', 'lock-laravel', __DIR__);
+
         $this->bootstrapManager();
         $this->bootstrapAuthedUserLock();
     }
