@@ -8,6 +8,10 @@ All notable changes to Lock - Laravel will be documented in this file. This file
 
 - Added Scrutinizer config
 
+### Fixed
+
+- Use new `createFromData` method to support data objects
+
 ## 1.0.0-alpha.2 - 2014-12-09
 
 ### Added
