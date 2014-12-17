@@ -47,6 +47,8 @@ class LockServiceProvider extends ServiceProvider
         $this->app->bindShared('lock.manager', function () use ($driver) {
             return new Manager($driver);
         });
+
+        $this->app->alias('lock.manager', 'BeatSwitch\Lock\Manager');
     }
 
     /**
@@ -94,6 +96,8 @@ class LockServiceProvider extends ServiceProvider
             // Bootstrap a SimpleCaller object which has the "guest" role.
             return $app['lock.manager']->caller(new SimpleCaller($userCallerType, 1, ['guest']));
         });
+
+        $this->app->alias('lock', 'BeatSwitch\Lock\Lock');
     }
 
     /**

@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.1.1 - 2014-12-17
+
+### Fixed
+
+- Implemented forgotten aliases
+
 ## 0.1.0 - 2014-12-17
 
 ### Added
