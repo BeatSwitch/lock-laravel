@@ -94,7 +94,7 @@ class LockServiceProvider extends ServiceProvider
             $userCallerType = $app['config']->get('lock-laravel::user_caller_type');
 
             // Bootstrap a SimpleCaller object which has the "guest" role.
-            return $app['lock.manager']->caller(new SimpleCaller($userCallerType, 1, ['guest']));
+            return $app['lock.manager']->caller(new SimpleCaller($userCallerType, 0, ['guest']));
         });
 
         $this->app->alias('lock', 'BeatSwitch\Lock\Lock');
