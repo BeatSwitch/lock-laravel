@@ -4,6 +4,10 @@ All notable changes to Lock - Laravel will be documented in this file. This file
 
 ## Unreleased
 
+### Changed
+
+- Permissions are now cached at runtime. Permissions are only reset when permissions are stored or removed.
+
 ### Fixed
 
 - Fixed a bug where the guest caller had an incorrect id set
