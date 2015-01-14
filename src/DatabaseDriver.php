@@ -57,7 +57,7 @@ class DatabaseDriver implements Driver
         $key = $this->getCallerKey($caller);
 
         // If we've saved the caller permissions we don't need to fetch them again.
-        if (array_key_exists($key, $this->callerPermissions) && $this->callerPermissions[$key]) {
+        if (array_key_exists($key, $this->callerPermissions)) {
             return $this->callerPermissions[$key];
         }
 
@@ -163,7 +163,7 @@ class DatabaseDriver implements Driver
         $key = $this->getRoleKey($role);
 
         // If we've saved the caller permissions we don't need to fetch them again.
-        if (array_key_exists($key, $this->rolePermissions) && $this->rolePermissions[$key]) {
+        if (array_key_exists($key, $this->rolePermissions)) {
             return $this->rolePermissions[$key];
         }
 
@@ -289,7 +289,7 @@ class DatabaseDriver implements Driver
      */
     protected function resetPermissionsCacheForCaller(Caller $caller)
     {
-        $this->callerPermissions[$this->getCallerKey($caller)] = [];
+        unset($this->callerPermissions[$this->getCallerKey($caller)]);
     }
 
     /**
@@ -297,6 +297,6 @@ class DatabaseDriver implements Driver
      */
     protected function resetPermissionsCacheForRole(Role $role)
     {
-        $this->rolePermissions[$this->getRoleKey($role)] = [];
+        unseT($this->rolePermissions[$this->getRoleKey($role)]);
     }
 }
