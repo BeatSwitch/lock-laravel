@@ -297,6 +297,6 @@ class DatabaseDriver implements Driver
      */
     protected function resetPermissionsCacheForRole(Role $role)
     {
-        unseT($this->rolePermissions[$this->getRoleKey($role)]);
+        unset($this->rolePermissions[$this->getRoleKey($role)]);
     }
 }
