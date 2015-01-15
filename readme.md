@@ -39,7 +39,7 @@ Register the service provider in your `app.php` config file.
 'BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider',
 ```
 
-Register facades in your `app.php` config file.
+Register the facades in your `app.php` config file.
 
 ```php
 'Lock' => 'BeatSwitch\Lock\Integrations\Laravel\Facades\Lock',
