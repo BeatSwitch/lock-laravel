@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.1.3 - 2015-01-15
+
+### Fixed
+
+- Fixed a bug with permission caching performance ([#8](https://github.com/BeatSwitch/lock-laravel/pull/8)) 
+
 ## 0.1.2 - 2015-01-13
 
 ### Changed
