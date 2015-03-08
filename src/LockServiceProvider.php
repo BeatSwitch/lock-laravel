@@ -65,12 +65,12 @@ class LockServiceProvider extends ServiceProvider
     protected function getDriver()
     {
         // Get the configuration options for Lock.
-        $driver = $this->app['config']->get('lock-laravel::driver');
+        $driver = $this->app['config']->get('lock.driver');
 
         // If the user choose the persistent database driver, bootstrap
         // the database driver with the default database connection.
         if ($driver === 'database') {
-            $table = $this->app['config']->get('lock-laravel::table');
+            $table = $this->app['config']->get('lock.table');
 
             return new DatabaseDriver($this->app['db']->connection(), $table);
         }
@@ -97,7 +97,7 @@ class LockServiceProvider extends ServiceProvider
             }
 
             // Get the caller type for the user caller.
-            $userCallerType = $app['config']->get('lock-laravel::user_caller_type');
+            $userCallerType = $app['config']->get('lock.user_caller_type');
 
             // Bootstrap a SimpleCaller object which has the "guest" role.
             return $app['lock.manager']->caller(new SimpleCaller($userCallerType, 0, ['guest']));
