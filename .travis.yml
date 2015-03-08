@@ -10,7 +10,6 @@ sudo: false
 
 before_script:
   - travis_retry composer install --no-interaction --prefer-source
-  - touch tests/database.sqlite
 
 script:
   - vendor/bin/phpunit --verbose
