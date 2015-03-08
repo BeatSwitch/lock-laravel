@@ -1,4 +1,4 @@
-# Lock - Laravel Driver
+# Lock - Laravel 5 Driver
 
 [![Build Status](https://img.shields.io/travis/BeatSwitch/lock-laravel/master.svg?style=flat-square)](https://travis-ci.org/BeatSwitch/lock-laravel)
 [![Quality Score](https://img.shields.io/scrutinizer/g/BeatSwitch/lock-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/BeatSwitch/lock-laravel)
@@ -9,7 +9,7 @@
 
 Lock is a flexible, driver based Acl package for PHP 5.4+.
 
-This package is a Laravel driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info.
+This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info.
 
 ## Table of Contents
 
@@ -46,16 +46,17 @@ Register the facades in your `app.php` config file.
 'LockManager' => 'BeatSwitch\Lock\Integrations\Laravel\Facades\LockManager',
 ```
 
-Publish the configuration file and edit the configuration options at `app/config/packages/beatswitch/lock-laravel/config.php`.
+Publish the configuration file. After publishing you can edit the configuration options at `config/lock.php`.
 
 ```bash
-$ php artisan config:publish beatswitch/lock-laravel
+$ php artisan vendor:publish --provider="BeatSwitch\Integrations\Laravel\LockServiceProvider" --tag="config"
 ```
 
 If you're using the database driver you should run the package's migrations. This will create the database table where all permissions will be stored.
 
 ```bash
-$ php artisan migrate --package="beatswitch/lock-laravel"
+$ php artisan vendor:publish --provider="BeatSwitch\Integrations\Laravel\LockServiceProvider" --tag="migrations"
+$ php artisan migrate"
 ```
 
 Please read the main [Lock documentation](https://github.com/BeatSwitch/lock) for setting up the caller contract on your `User` model and for more in-depth documentation on how Lock works.
@@ -118,7 +119,7 @@ return [
 ];
 ```
 
-You'll probably never want to set permissions for your current authed user caller because they'd apply to every user who logs in but it's there if you need it.
+You'll probably never want to set permissions for your current authenticated user caller because they'd apply to every user who logs in but it's there if you need it.
 
 > **Warning:** Make sure that you never set permissions through the `permissions` callback when using the database driver. This would result in permissions getting stored into your database each time your app is run.
 
@@ -130,7 +131,7 @@ Now that you have your database driver set up, you're ready to create a UI for y
 
 ### Using the facades
 
-This package ships with two facades: the `Lock` facade which holds the `BeatSwitch\Lock\Lock` instance for your current authed user (or the guest user if no user is authed) and the `LockManager` class which can be used to bootstrap new lock instances for callers or roles.
+This package ships with two facades: the `Lock` facade which holds the `BeatSwitch\Lock\Lock` instance for your current authenticated user (or the guest user if no user is authenticated) and the `LockManager` class which can be used to bootstrap new lock instances for callers or roles.
 
 Checking permissions for the current user is easy.
 
