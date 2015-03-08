@@ -22,12 +22,12 @@ class LockServiceProvider extends ServiceProvider
     {
         // Package configuration
         $this->publishes([
-            __DIR__.'/config/config.php' => config_path('lock.php')
+            __DIR__ . '/config/config.php' => config_path('lock.php')
         ], 'config');
 
         // Package migrations
         $this->publishes([
-            __DIR__.'/migrations/' => base_path('/database/migrations')
+            __DIR__ . '/migrations/' => base_path('/database/migrations')
         ], 'migrations');
 
         $this->bootstrapPermissions();
@@ -116,7 +116,7 @@ class LockServiceProvider extends ServiceProvider
         $callback = $this->app['config']->get('lock.permissions', null);
 
         // Add the permissions which were set in the config file.
-        if (!is_null($callback)) {
+        if (! is_null($callback)) {
             call_user_func($callback, $this->app['lock.manager'], $this->app['lock']);
         }
     }
