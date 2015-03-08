@@ -47,8 +47,7 @@ class DatabaseDriverTest extends PersistentDriverTestCase
         $this->database = new Manager;
         $this->database->addConnection([
             'driver'   => 'sqlite',
-            'database' => __DIR__ . '/database.sqlite',
-            'prefix'   => '',
+            'database' => ':memory:'
         ]);
 
         // Reset the sqlite database.
