@@ -22,18 +22,14 @@ class LockServiceProvider extends ServiceProvider
     {
         // Package configuration
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('lock-laravel.php')
+            __DIR__.'/config/config.php' => config_path('lock.php')
         ], 'config');
 
-        // Here we should execute the permissions callback from the config file so all
-        // the roles and aliases get registered and if we're using the array driver,
-        // all of our permissions get set beforehand.
+        $this->publishes([
+            __DIR__.'/migrations/' => base_path('/database/migrations')
+        ], 'migrations');
 
-        // Get the permissions callback from the config file.
-        $callback = $this->app['config']->get('lock-laravel::permissions');
-
-        // Add the permissions which were set in the config file.
-        call_user_func($callback, $this->app['lock.manager'], $this->app['lock']);
+        $this->bootstrapPermissions();
     }
 
     /**
@@ -108,6 +104,24 @@ class LockServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('lock', 'BeatSwitch\Lock\Lock');
+    }
+
+    /**
+     *
+     */
+    protected function bootstrapPermissions()
+    {
+        // Here we should execute the permissions callback from the config file so all
+        // the roles and aliases get registered and if we're using the array driver,
+        // all of our permissions get set beforehand.
+
+        // Get the permissions callback from the config file.
+        $callback = $this->app['config']->get('lock.permissions', null);
+
+        // Add the permissions which were set in the config file.
+        if (!is_null($callback)) {
+            call_user_func($callback, $this->app['lock.manager'], $this->app['lock']);
+        }
     }
 
     /**
