@@ -49,13 +49,13 @@ Register the facades in your `app.php` config file.
 Publish the configuration file. After publishing you can edit the configuration options at `config/lock.php`.
 
 ```bash
-$ php artisan vendor:publish --provider="BeatSwitch\Integrations\Laravel\LockServiceProvider" --tag="config"
+$ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="config"
 ```
 
 If you're using the database driver you should run the package's migrations. This will create the database table where all permissions will be stored.
 
 ```bash
-$ php artisan vendor:publish --provider="BeatSwitch\Integrations\Laravel\LockServiceProvider" --tag="migrations"
+$ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="migrations"
 $ php artisan migrate"
 ```
 
