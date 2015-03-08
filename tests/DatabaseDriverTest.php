@@ -29,15 +29,6 @@ class DatabaseDriverTest extends PersistentDriverTestCase
         parent::setUp();
     }
 
-    protected function tearDown()
-    {
-        // Unset the database connection.
-        $this->database->getConnection()->disconnect();
-        unset($this->database);
-
-        parent::tearDown();
-    }
-
     /**
      * Setup the database
      */
@@ -49,9 +40,6 @@ class DatabaseDriverTest extends PersistentDriverTestCase
             'driver'   => 'sqlite',
             'database' => ':memory:'
         ]);
-
-        // Reset the sqlite database.
-        $this->database->getConnection()->getSchemaBuilder()->dropIfExists($this->table);
 
         // Execute migrations.
         $this->database->getConnection()->getSchemaBuilder()->create($this->table, function (Blueprint $table) {
