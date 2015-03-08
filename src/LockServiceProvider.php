@@ -25,6 +25,7 @@ class LockServiceProvider extends ServiceProvider
             __DIR__.'/config/config.php' => config_path('lock.php')
         ], 'config');
 
+        // Package migrations
         $this->publishes([
             __DIR__.'/migrations/' => base_path('/database/migrations')
         ], 'migrations');
@@ -48,10 +49,8 @@ class LockServiceProvider extends ServiceProvider
      */
     protected function bootstrapManager()
     {
-        $driver = $this->getDriver();
-
-        $this->app->bindShared('lock.manager', function () use ($driver) {
-            return new Manager($driver);
+        $this->app->bindShared('lock.manager', function () {
+            return new Manager($this->getDriver());
         });
 
         $this->app->alias('lock.manager', 'BeatSwitch\Lock\Manager');
@@ -107,14 +106,12 @@ class LockServiceProvider extends ServiceProvider
     }
 
     /**
-     *
+     * Here we should execute the permissions callback from the config file so all
+     * the roles and aliases get registered and if we're using the array driver,
+     * all of our permissions get set beforehand.
      */
     protected function bootstrapPermissions()
     {
-        // Here we should execute the permissions callback from the config file so all
-        // the roles and aliases get registered and if we're using the array driver,
-        // all of our permissions get set beforehand.
-
         // Get the permissions callback from the config file.
         $callback = $this->app['config']->get('lock.permissions', null);
 
