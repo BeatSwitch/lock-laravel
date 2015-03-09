@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.2.1 - 2015-03-09
+
+### Changed
+
+- More stricter version constraints for Laravel 5 ([#20](https://github.com/BeatSwitch/lock-laravel/pull/20))
+
 ## 0.2.0 - 2015-03-08
 
 ### Added
