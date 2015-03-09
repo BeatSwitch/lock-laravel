@@ -56,7 +56,7 @@ If you're using the database driver you should run the package's migrations. Thi
 
 ```bash
 $ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="migrations"
-$ php artisan migrate"
+$ php artisan migrate
 ```
 
 Please read the main [Lock documentation](https://github.com/BeatSwitch/lock) for setting up the caller contract on your `User` model and for more in-depth documentation on how Lock works.
