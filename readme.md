@@ -199,4 +199,4 @@ You can see a list of changes for each release in [the changelog file](changelog
 
 ## License
 
-The MIT License (MIT). Please see [the license file](license.md) for more information.
+The MIT License. Please see [the license file](license.md) for more information.
