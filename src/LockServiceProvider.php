@@ -9,13 +9,6 @@ use Illuminate\Support\ServiceProvider;
 class LockServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
      * Bootstrap the service provider
      */
     public function boot()
