@@ -113,7 +113,7 @@ return [
             $manager->role('editor')->allow('publish', 'posts');
 
             // Set permissions for a specific user.
-            $manager->caller(new SimpleCaller('users', 1)->allow('publish', 'posts');
+            $manager->caller(new SimpleCaller('users', 1))->allow('publish', 'posts');
         }
     },
 ];
