@@ -16,7 +16,7 @@ This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock
 - [Installation](#installation)
 - [Usage](#usage)
     - [Setting roles and aliases](#setting-roles-and-aliases)
-    - [Setting permissions with the array driver](#using-permissions-with-the-array-driver)
+    - [Setting permissions with the array driver](#setting-permissions-with-the-array-driver)
     - [Using the database driver](#using-the-database-driver)
     - [Using the facades](#using-the-facades)
     - [Using dependency injection](#using-dependency-injection)
