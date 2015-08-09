@@ -7,9 +7,7 @@
 [![Packagist Version](https://img.shields.io/packagist/v/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
 
-Lock is a flexible, driver based Acl package for PHP 5.4+.
-
-This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info.
+This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires PHP 5.5.9+.
 
 ## Table of Contents
 
@@ -42,8 +40,8 @@ BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider::class,
 Register the facades in your `app.php` config file.
 
 ```php
-'Lock' => 'BeatSwitch\Lock\Integrations\Laravel\Facades\Lock',
-'LockManager' => 'BeatSwitch\Lock\Integrations\Laravel\Facades\LockManager',
+'Lock' => BeatSwitch\Lock\Integrations\Laravel\Facades\Lock::class,
+'LockManager' => BeatSwitch\Lock\Integrations\Laravel\Facades\LockManager::class,
 ```
 
 Publish the configuration file. After publishing you can edit the configuration options at `config/lock.php`.

@@ -3,6 +3,7 @@ namespace BeatSwitch\Lock\Integrations\Laravel;
 
 use BeatSwitch\Lock\Callers\SimpleCaller;
 use BeatSwitch\Lock\Drivers\ArrayDriver;
+use BeatSwitch\Lock\Lock;
 use BeatSwitch\Lock\Manager;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,11 +43,9 @@ class LockServiceProvider extends ServiceProvider
      */
     protected function bootstrapManager()
     {
-        $this->app->bindShared('lock.manager', function () {
+        $this->app->bindShared(Manager::class, function () {
             return new Manager($this->getDriver());
         });
-
-        $this->app->alias('lock.manager', 'BeatSwitch\Lock\Manager');
     }
 
     /**
@@ -76,11 +75,11 @@ class LockServiceProvider extends ServiceProvider
      */
     protected function bootstrapAuthedUserLock()
     {
-        $this->app->bindShared('lock', function ($app) {
+        $this->app->bindShared(Lock::class, function ($app) {
             // If the user is logged in, we'll make the user lock aware and register its lock instance.
             if ($app['auth']->check()) {
                 // Get the lock instance for the authed user.
-                $lock = $app['lock.manager']->caller($app['auth']->user());
+                $lock = $app[Manager::class]->caller($app['auth']->user());
 
                 // Enable the LockAware trait on the user.
                 $app['auth']->user()->setLock($lock);
@@ -92,10 +91,8 @@ class LockServiceProvider extends ServiceProvider
             $userCallerType = $app['config']->get('lock.user_caller_type');
 
             // Bootstrap a SimpleCaller object which has the "guest" role.
-            return $app['lock.manager']->caller(new SimpleCaller($userCallerType, 0, ['guest']));
+            return $app[Manager::class]->caller(new SimpleCaller($userCallerType, 0, ['guest']));
         });
-
-        $this->app->alias('lock', 'BeatSwitch\Lock\Lock');
     }
 
     /**
@@ -110,7 +107,7 @@ class LockServiceProvider extends ServiceProvider
 
         // Add the permissions which were set in the config file.
         if (! is_null($callback)) {
-            call_user_func($callback, $this->app['lock.manager'], $this->app['lock']);
+            call_user_func($callback, $this->app[Manager::class], $this->app[Lock::class]);
         }
     }
 
@@ -121,6 +118,6 @@ class LockServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['lock', 'lock.manager'];
+        return [Lock::class, Manager::class];
     }
 }

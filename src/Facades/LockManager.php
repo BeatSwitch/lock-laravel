@@ -12,6 +12,6 @@ class LockManager extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'lock.manager';
+        return Manager::class;
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace BeatSwitch\Lock\Integrations\Laravel\Facades;
 
+use BeatSwitch\Lock\Lock;
 use Illuminate\Support\Facades\Facade;
 
 class Lock extends Facade
@@ -12,6 +13,6 @@ class Lock extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'lock';
+        return Lock::class;
     }
 }

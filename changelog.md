@@ -2,6 +2,14 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.4.0 - 2015-08-09
+
+### Changed
+
+- Require PHP 5.5.9+
+- Dropped support for Laravel 5.0
+- Removed `lock` and `lock.manager` aliases from IoC container bindings
+
 ## 0.3.0 - 2015-06-04
 
 ### Added
