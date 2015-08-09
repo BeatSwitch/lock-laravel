@@ -36,7 +36,7 @@ $ composer require beatswitch/lock-laravel
 Register the service provider in your `app.php` config file.
 
 ```php
-'BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider',
+BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider::class,
 ```
 
 Register the facades in your `app.php` config file.
