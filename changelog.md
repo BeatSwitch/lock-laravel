@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.4.1 - 2015-08-14
+
+### Fixed
+
+- Fixed a class dependency issue ([#34](https://github.com/BeatSwitch/lock-laravel/pull/34))
+
 ## 0.4.0 - 2015-08-09
 
 ### Changed
