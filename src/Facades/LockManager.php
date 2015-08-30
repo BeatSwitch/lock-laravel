@@ -1,6 +1,7 @@
 <?php
 namespace BeatSwitch\Lock\Integrations\Laravel\Facades;
 
+use BeatSwitch\Lock\Manager;
 use Illuminate\Support\Facades\Facade;
 
 class LockManager extends Facade
