@@ -23,4 +23,4 @@ matrix:
 
 addons:
   code_climate:
-    repo_token: CODE_CLIMATE_TOKEN
+    repo_token: $CODE_CLIMATE_TOKEN
