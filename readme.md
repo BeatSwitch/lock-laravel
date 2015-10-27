@@ -7,6 +7,10 @@
 [![Packagist Version](https://img.shields.io/packagist/v/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/beatswitch/lock-laravel.svg?style=flat-square)](https://packagist.org/packages/beatswitch/lock-laravel)
 
+> I'm sad to say that Lock is currently not maintained. I won't be able to offer support or accept new contributions for the current time being. Other priorities are keeping me from putting the work into Lock that it deserves. Eventually I'll try to pick up work again but unfortunately I cannot say when. My thanks goes out to all the contributors and users.
+>
+> -- Dries
+
 This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires PHP 5.5.9+.
 
 ## Table of Contents
@@ -183,6 +187,8 @@ class UserManagementController extends BaseController
 ```
 
 ## Maintainer
+
+> Lock is currently unmaintained.
 
 This package is currently maintained by [Dries Vints](https://github.com/driesvints).  
 If you have any questions please don't hesitate to [ask them in an issue](https://github.com/BeatSwitch/lock-laravel/issues/new).
