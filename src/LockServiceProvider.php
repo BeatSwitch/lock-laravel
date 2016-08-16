@@ -43,7 +43,7 @@ class LockServiceProvider extends ServiceProvider
      */
     protected function bootstrapManager()
     {
-        $this->app->bindShared(Manager::class, function () {
+        $this->app->singleton(Manager::class, function () {
             return new Manager($this->getDriver());
         });
     }
@@ -75,7 +75,7 @@ class LockServiceProvider extends ServiceProvider
      */
     protected function bootstrapAuthedUserLock()
     {
-        $this->app->bindShared(Lock::class, function ($app) {
+        $this->app->singleton(Lock::class, function ($app) {
             // If the user is logged in, we'll make the user lock aware and register its lock instance.
             if ($app['auth']->check()) {
                 // Get the lock instance for the authed user.
