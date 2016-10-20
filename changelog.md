@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## [Unreleased]
+
+## Changed
+
+- PHP 5.6 and Laravel 5.3 are now the new minimum requirements
+
 ## 0.4.2 - 2015-09-05
 
 ### Fixed
