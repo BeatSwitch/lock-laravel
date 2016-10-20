@@ -11,7 +11,7 @@
 >
 > -- Dries
 
-This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires PHP 5.5.9+.
+This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires at least PHP 5.6.
 
 ## Table of Contents
 
