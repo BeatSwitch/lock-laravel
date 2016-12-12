@@ -1,4 +1,5 @@
 <?php
+
 namespace BeatSwitch\Lock\Integrations\Laravel;
 
 use BeatSwitch\Lock\Callers\Caller;

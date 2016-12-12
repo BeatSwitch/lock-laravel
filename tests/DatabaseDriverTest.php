@@ -1,4 +1,5 @@
 <?php
+
 namespace tests\BeatSwitch\Lock\Integrations\Laravel;
 
 use BeatSwitch\Lock\Integrations\Laravel\DatabaseDriver;

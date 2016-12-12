@@ -1,4 +1,5 @@
 <?php
+
 namespace BeatSwitch\Lock\Integrations\Laravel\Middleware;
 
 use BeatSwitch\Lock\Lock;
