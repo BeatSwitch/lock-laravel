@@ -9,9 +9,6 @@ use Illuminate\Support\ServiceProvider;
 
 class LockServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the service provider
-     */
     public function boot()
     {
         // Package configuration
@@ -23,8 +20,6 @@ class LockServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../migrations/' => base_path('/database/migrations')
         ], 'migrations');
-
-        $this->bootstrapPermissions();
     }
 
     /**
@@ -34,14 +29,14 @@ class LockServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->bootstrapManager();
-        $this->bootstrapAuthedUserLock();
+        $this->registerManager();
+        $this->registerAuthenticatedUserLock();
     }
 
     /**
-     * This method will bootstrap the lock manager instance
+     * This method will register the lock manager instance
      */
-    protected function bootstrapManager()
+    private function registerManager()
     {
         $this->app->singleton(Manager::class, function () {
             return new Manager($this->getDriver());
@@ -53,32 +48,30 @@ class LockServiceProvider extends ServiceProvider
      *
      * @return \BeatSwitch\Lock\Drivers\Driver
      */
-    protected function getDriver()
+    private function getDriver()
     {
         // Get the configuration options for Lock.
-        $driver = $this->app['config']->get('lock.driver');
+        $driver = config('lock.driver');
 
         // If the user choose the persistent database driver, bootstrap
         // the database driver with the default database connection.
         if ($driver === 'database') {
-            $table = $this->app['config']->get('lock.table');
-
-            return new DatabaseDriver($this->app['db']->connection(), $table);
+            return new DatabaseDriver($this->app['db']->connection(), config('lock.table'));
         }
 
-        // Otherwise bootstrap the static array driver.
+        // Otherwise use the static array driver.
         return new ArrayDriver();
     }
 
     /**
-     * This will bootstrap the lock instance for the authed user
+     * This will register the lock instance for the authenticated user
      */
-    protected function bootstrapAuthedUserLock()
+    private function registerAuthenticatedUserLock()
     {
         $this->app->singleton(Lock::class, function ($app) {
             // If the user is logged in, we'll make the user lock aware and register its lock instance.
             if ($app['auth']->check()) {
-                // Get the lock instance for the authed user.
+                // Get the lock instance for the authenticated user.
                 $lock = $app[Manager::class]->caller($app['auth']->user());
 
                 // Enable the LockAware trait on the user.
@@ -88,36 +81,10 @@ class LockServiceProvider extends ServiceProvider
             }
 
             // Get the caller type for the user caller.
-            $userCallerType = $app['config']->get('lock.user_caller_type');
+            $userCallerType = config('lock.user_caller_type');
 
             // Bootstrap a SimpleCaller object which has the "guest" role.
             return $app[Manager::class]->caller(new SimpleCaller($userCallerType, 0, ['guest']));
         });
-    }
-
-    /**
-     * Here we should execute the permissions callback from the config file so all
-     * the roles and aliases get registered and if we're using the array driver,
-     * all of our permissions get set beforehand.
-     */
-    protected function bootstrapPermissions()
-    {
-        // Get the permissions callback from the config file.
-        $callback = $this->app['config']->get('lock.permissions', null);
-
-        // Add the permissions which were set in the config file.
-        if (! is_null($callback)) {
-            call_user_func($callback, $this->app[Manager::class], $this->app[Lock::class]);
-        }
-    }
-
-    /**
-     * Get the services provided by the provider
-     *
-     * @return string[]
-     */
-    public function provides()
-    {
-        return [Lock::class, Manager::class];
     }
 }

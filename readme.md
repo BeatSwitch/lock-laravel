@@ -54,6 +54,10 @@ Publish the configuration file. After publishing you can edit the configuration 
 $ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="config"
 ```
 
+In order bootstrap the permissions from the configuration file we'll need to register a global middleware somewhere after the `StartSession` middleware from Laravel.
+
+`\BeatSwitch\Lock\Integrations\Laravel\Middleware\BootstrapLockPermissions::class,`
+
 If you're using the database driver you should run the package's migrations. This will create the database table where all permissions will be stored.
 
 ```bash
