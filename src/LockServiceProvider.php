@@ -16,12 +16,12 @@ class LockServiceProvider extends ServiceProvider
     {
         // Package configuration
         $this->publishes([
-            __DIR__ . '/config/config.php' => config_path('lock.php')
+            __DIR__ . '/../config/config.php' => config_path('lock.php')
         ], 'config');
 
         // Package migrations
         $this->publishes([
-            __DIR__ . '/migrations/' => base_path('/database/migrations')
+            __DIR__ . '/../migrations/' => base_path('/database/migrations')
         ], 'migrations');
 
         $this->bootstrapPermissions();
