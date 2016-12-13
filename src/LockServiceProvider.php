@@ -2,7 +2,6 @@
 
 namespace BeatSwitch\Lock\Integrations\Laravel;
 
-use BeatSwitch\Lock\Callers\SimpleCaller;
 use BeatSwitch\Lock\Drivers\ArrayDriver;
 use BeatSwitch\Lock\Lock;
 use BeatSwitch\Lock\Manager;
@@ -40,7 +39,20 @@ class LockServiceProvider extends ServiceProvider
     private function registerManager()
     {
         $this->app->singleton(Manager::class, function () {
-            return new Manager($this->getDriver());
+            $manager = new Manager($this->driver());
+
+            // If we're using the array driver, we'll try to bootstrap the permissions from the config file.
+            if ($manager->getDriver() instanceof ArrayDriver) {
+                // Get the permissions callback from the config file.
+                $callback = config('lock.permissions');
+
+                // Add the permissions which were set in the config file.
+                if ($callback !== null) {
+                    call_user_func($callback, $manager);
+                }
+            }
+
+            return $manager;
         });
     }
 
@@ -49,14 +61,11 @@ class LockServiceProvider extends ServiceProvider
      *
      * @return \BeatSwitch\Lock\Drivers\Driver
      */
-    private function getDriver()
+    private function driver()
     {
-        // Get the configuration options for Lock.
-        $driver = config('lock.driver');
-
         // If the user choose the persistent database driver, bootstrap
         // the database driver with the default database connection.
-        if ($driver === 'database') {
+        if (config('lock.driver') === 'database') {
             return new DatabaseDriver($this->app['db']->connection(), config('lock.table'));
         }
 
@@ -69,23 +78,8 @@ class LockServiceProvider extends ServiceProvider
      */
     private function registerAuthenticatedUserLock()
     {
-        $this->app->singleton(Lock::class, function ($app) {
-            // If the user is logged in, we'll make the user lock aware and register its lock instance.
-            if ($app['auth']->check()) {
-                // Get the lock instance for the authenticated user.
-                $lock = $app[Manager::class]->caller($app['auth']->user());
-
-                // Enable the LockAware trait on the user.
-                $app['auth']->user()->setLock($lock);
-
-                return $lock;
-            }
-
-            // Get the caller type for the user caller.
-            $userCallerType = config('lock.user_caller_type');
-
-            // Bootstrap a SimpleCaller object which has the "guest" role.
-            return $app[Manager::class]->caller(new SimpleCaller($userCallerType, 0, ['guest']));
+        $this->app->singleton(Lock::class, function($app) {
+            return new UserLock($app[Manager::class], $app['auth.driver'], config('lock.user_caller_type'));
         });
     }
 }

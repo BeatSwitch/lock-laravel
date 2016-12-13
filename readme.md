@@ -54,7 +54,7 @@ Publish the configuration file. After publishing you can edit the configuration 
 $ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="config"
 ```
 
-In order bootstrap the permissions from the configuration file we'll need to register a global middleware somewhere after the `StartSession` middleware from Laravel.
+If you want the `LockAware` trait to work on the `User` model you'll need to activate it with a middleware. Register the middleware below after the `StartSession` middleware.
 
 `\BeatSwitch\Lock\Integrations\Laravel\Middleware\BootstrapLockPermissions::class,`
 
@@ -78,14 +78,13 @@ You can register roles and aliases beforehand through the `permissions` callback
 ```php
 <?php
 
-use BeatSwitch\Lock\Callers\Caller;
 use BeatSwitch\Lock\Manager;
 
 return [
 
     ...
 
-    'permissions' => function (Manager $manager, Caller $caller) {
+    'permissions' => function (Manager $manager) {
         // Set your configuration here.
         $manager->alias('manage', ['create', 'read', 'update', 'delete']);
         $manager->setRole('user', 'guest');
@@ -101,7 +100,6 @@ If you're using the array driver you can set all your permissions beforehand in 
 ```php
 <?php
 
-use BeatSwitch\Lock\Callers\Caller;
 use BeatSwitch\Lock\Callers\SimpleCaller;
 use BeatSwitch\Lock\Drivers\ArrayDriver;
 use BeatSwitch\Lock\Manager;
@@ -110,7 +108,7 @@ return [
 
     ...
 
-    'permissions' => function (Manager $manager, Caller $caller) {
+    'permissions' => function (Manager $manager) {
         // Only set permissions beforehand when using the array driver.
         if ($manager->getDriver() instanceof ArrayDriver) {
             // Set some role permissions.
@@ -124,10 +122,6 @@ return [
     },
 ];
 ```
-
-You'll probably never want to set permissions for your current authenticated user caller because they'd apply to every user who logs in but it's there if you need it.
-
-> **Warning:** Make sure that you never set permissions through the `permissions` callback when using the database driver. This would result in permissions getting stored into your database each time your app is run.
 
 ### Using the database driver
 
