@@ -28,7 +28,7 @@ class BootstrapLockPermissions
     {
         if (Auth::check()) {
             // Get the lock instance for the authenticated user.
-            $lock = $this->manager->caller(Auth::user()->user());
+            $lock = $this->manager->caller(Auth::user());
 
             // Enable the LockAware trait on the user.
             Auth::user()->setLock($lock);
