@@ -1,4 +1,5 @@
 <?php
+
 namespace BeatSwitch\Lock\Integrations\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;

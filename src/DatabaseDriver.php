@@ -1,4 +1,5 @@
 <?php
+
 namespace BeatSwitch\Lock\Integrations\Laravel;
 
 use BeatSwitch\Lock\Callers\Caller;
@@ -37,7 +38,6 @@ class DatabaseDriver implements Driver
     protected $rolePermissions = [];
 
     /**
-     * @param \Illuminate\Database\ConnectionInterface $connection
      * @param string $table
      */
     public function __construct(ConnectionInterface $connection, $table)
@@ -49,7 +49,6 @@ class DatabaseDriver implements Driver
     /**
      * Returns all the permissions for a caller
      *
-     * @param \BeatSwitch\Lock\Callers\Caller $caller
      * @return \BeatSwitch\Lock\Permissions\Permission[]
      */
     public function getCallerPermissions(Caller $caller)
@@ -64,7 +63,8 @@ class DatabaseDriver implements Driver
         $results = $this->getTable()
             ->where('caller_type', $caller->getCallerType())
             ->where('caller_id', $caller->getCallerId())
-            ->get();
+            ->get()
+            ->toArray();
 
         return $this->callerPermissions[$key] = PermissionFactory::createFromData($results);
     }
@@ -72,8 +72,6 @@ class DatabaseDriver implements Driver
     /**
      * Stores a new permission for a caller
      *
-     * @param \BeatSwitch\Lock\Callers\Caller $caller
-     * @param \BeatSwitch\Lock\Permissions\Permission
      * @return void
      */
     public function storeCallerPermission(Caller $caller, Permission $permission)
@@ -93,8 +91,6 @@ class DatabaseDriver implements Driver
     /**
      * Removes a permission for a caller
      *
-     * @param \BeatSwitch\Lock\Callers\Caller $caller
-     * @param \BeatSwitch\Lock\Permissions\Permission
      * @return void
      */
     public function removeCallerPermission(Caller $caller, Permission $permission)
@@ -125,8 +121,6 @@ class DatabaseDriver implements Driver
     /**
      * Checks if a permission is stored for a caller
      *
-     * @param \BeatSwitch\Lock\Callers\Caller $caller
-     * @param \BeatSwitch\Lock\Permissions\Permission
      * @return bool
      */
     public function hasCallerPermission(Caller $caller, Permission $permission)
@@ -167,7 +161,7 @@ class DatabaseDriver implements Driver
             return $this->rolePermissions[$key];
         }
 
-        $results = $this->getTable()->where('role', $role->getRoleName())->get();
+        $results = $this->getTable()->where('role', $role->getRoleName())->get()->toArray();
 
         return $this->rolePermissions[$key] = PermissionFactory::createFromData($results);
     }

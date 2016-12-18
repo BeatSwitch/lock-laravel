@@ -11,7 +11,7 @@
 >
 > -- Dries
 
-This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires PHP 5.5.9+.
+This package is a Laravel 5 driver for [Lock](https://github.com/BeatSwitch/lock). Check the documentation of Lock for more info. It requires at least PHP 5.6.
 
 ## Table of Contents
 
@@ -63,7 +63,9 @@ $ php artisan migrate
 
 Please read the main [Lock documentation](https://github.com/BeatSwitch/lock) for setting up the caller contract on your `User` model and for more in-depth documentation on how Lock works.
 
-Also make sure to set the `BeatSwitch\Lock\LockAware` trait on your `User` model. That way your authenticated user will receive a Lock instance of itself so you can call permissions directly from your user object. If no user is authenticated, a `SimpleCaller` object will be bootstrapped which has the `guest` role. That way you can still use the `Lock` facade.
+Also make sure to set the `BeatSwitch\Lock\LockAware` trait on your `User` model. That way your authenticated user will receive a Lock instance of itself so you can call permissions directly from your user object. If no user is authenticated, a `SimpleCaller` object will be bootstrapped which has the `guest` role. That way you can still use the `Lock` facade. If you want the `LockAware` trait to work on the `User` model you'll need to activate it with a middleware. Register the middleware below after the `StartSession` middleware.
+
+`\BeatSwitch\Lock\Integrations\Laravel\Middleware\InitLockAwareTrait::class,`
 
 ## Usage
 
@@ -74,14 +76,13 @@ You can register roles and aliases beforehand through the `permissions` callback
 ```php
 <?php
 
-use BeatSwitch\Lock\Callers\Caller;
 use BeatSwitch\Lock\Manager;
 
 return [
 
     ...
 
-    'permissions' => function (Manager $manager, Caller $caller) {
+    'permissions' => function (Manager $manager) {
         // Set your configuration here.
         $manager->alias('manage', ['create', 'read', 'update', 'delete']);
         $manager->setRole('user', 'guest');
@@ -97,7 +98,6 @@ If you're using the array driver you can set all your permissions beforehand in 
 ```php
 <?php
 
-use BeatSwitch\Lock\Callers\Caller;
 use BeatSwitch\Lock\Callers\SimpleCaller;
 use BeatSwitch\Lock\Drivers\ArrayDriver;
 use BeatSwitch\Lock\Manager;
@@ -106,7 +106,7 @@ return [
 
     ...
 
-    'permissions' => function (Manager $manager, Caller $caller) {
+    'permissions' => function (Manager $manager) {
         // Only set permissions beforehand when using the array driver.
         if ($manager->getDriver() instanceof ArrayDriver) {
             // Set some role permissions.
@@ -120,10 +120,6 @@ return [
     },
 ];
 ```
-
-You'll probably never want to set permissions for your current authenticated user caller because they'd apply to every user who logs in but it's there if you need it.
-
-> **Warning:** Make sure that you never set permissions through the `permissions` callback when using the database driver. This would result in permissions getting stored into your database each time your app is run.
 
 ### Using the database driver
 

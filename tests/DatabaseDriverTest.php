@@ -1,5 +1,6 @@
 <?php
-namespace tests\BeatSwitch\Lock\Integrations\Laravel;
+
+namespace Tests;
 
 use BeatSwitch\Lock\Integrations\Laravel\DatabaseDriver;
 use Illuminate\Database\Capsule\Manager;
