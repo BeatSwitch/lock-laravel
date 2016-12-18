@@ -65,7 +65,9 @@ Please read the main [Lock documentation](https://github.com/BeatSwitch/lock) fo
 
 Also make sure to set the `BeatSwitch\Lock\LockAware` trait on your `User` model. That way your authenticated user will receive a Lock instance of itself so you can call permissions directly from your user object. If no user is authenticated, a `SimpleCaller` object will be bootstrapped which has the `guest` role. That way you can still use the `Lock` facade. If you want the `LockAware` trait to work on the `User` model you'll need to activate it with a middleware. Register the middleware below after the `StartSession` middleware.
 
-`\BeatSwitch\Lock\Integrations\Laravel\Middleware\InitLockAwareTrait::class,`
+```php
+\BeatSwitch\Lock\Integrations\Laravel\Middleware\InitLockAwareTrait::class,
+```
 
 ## Usage
 
