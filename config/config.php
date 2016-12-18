@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'driver' => 'array',
+    'driver' => BeatSwitch\Lock\Drivers\ArrayDriver::class,
 
     /*
     |--------------------------------------------------------------------------

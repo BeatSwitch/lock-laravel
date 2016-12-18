@@ -2,11 +2,19 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
-## [Unreleased]
+## 0.5.0 - 2016-12-18
+
+## Added
+
+- Added a new `UserLock` class to handle the default Lock instance
+- Added a new `InitLockAwareTrait` middleware to bootstrap the `LockAware` trait
 
 ## Changed
 
 - PHP 5.6 and Laravel 5.3 are now the new minimum requirements
+- Completely reworked the `LockServiceProvider` class
+- `permissions` option in the acl only handles role configuration now
+- Moved the `config` and `migrations` directories out of the src directory
 
 ## 0.4.2 - 2015-09-05
 

@@ -54,10 +54,6 @@ Publish the configuration file. After publishing you can edit the configuration 
 $ php artisan vendor:publish --provider="BeatSwitch\Lock\Integrations\Laravel\LockServiceProvider" --tag="config"
 ```
 
-If you want the `LockAware` trait to work on the `User` model you'll need to activate it with a middleware. Register the middleware below after the `StartSession` middleware.
-
-`\BeatSwitch\Lock\Integrations\Laravel\Middleware\BootstrapLockPermissions::class,`
-
 If you're using the database driver you should run the package's migrations. This will create the database table where all permissions will be stored.
 
 ```bash
@@ -67,7 +63,9 @@ $ php artisan migrate
 
 Please read the main [Lock documentation](https://github.com/BeatSwitch/lock) for setting up the caller contract on your `User` model and for more in-depth documentation on how Lock works.
 
-Also make sure to set the `BeatSwitch\Lock\LockAware` trait on your `User` model. That way your authenticated user will receive a Lock instance of itself so you can call permissions directly from your user object. If no user is authenticated, a `SimpleCaller` object will be bootstrapped which has the `guest` role. That way you can still use the `Lock` facade.
+Also make sure to set the `BeatSwitch\Lock\LockAware` trait on your `User` model. That way your authenticated user will receive a Lock instance of itself so you can call permissions directly from your user object. If no user is authenticated, a `SimpleCaller` object will be bootstrapped which has the `guest` role. That way you can still use the `Lock` facade. If you want the `LockAware` trait to work on the `User` model you'll need to activate it with a middleware. Register the middleware below after the `StartSession` middleware.
+
+`\BeatSwitch\Lock\Integrations\Laravel\Middleware\InitLockAwareTrait::class,`
 
 ## Usage
 

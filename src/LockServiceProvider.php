@@ -36,7 +36,7 @@ class LockServiceProvider extends ServiceProvider
     /**
      * This method will register the lock manager instance
      */
-    private function registerManager()
+    protected function registerManager()
     {
         $this->app->singleton(Manager::class, function () {
             $manager = new Manager($this->driver());
@@ -61,7 +61,7 @@ class LockServiceProvider extends ServiceProvider
      *
      * @return \BeatSwitch\Lock\Drivers\Driver
      */
-    private function driver()
+    protected function driver()
     {
         // If the user choose the persistent database driver, bootstrap
         // the database driver with the default database connection.
@@ -76,7 +76,7 @@ class LockServiceProvider extends ServiceProvider
     /**
      * This will register the lock instance for the authenticated user
      */
-    private function registerAuthenticatedUserLock()
+    protected function registerAuthenticatedUserLock()
     {
         $this->app->singleton(Lock::class, function($app) {
             return new UserLock($app[Manager::class], $app['auth.driver'], config('lock.user_caller_type'));

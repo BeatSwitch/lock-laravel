@@ -6,7 +6,7 @@ use Auth;
 use BeatSwitch\Lock\Manager;
 use Closure;
 
-class BootstrapLockPermissions
+class InitLockAwareTrait
 {
     /**
      * @var \BeatSwitch\Lock\Manager
