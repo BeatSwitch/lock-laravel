@@ -23,9 +23,9 @@
     "require": {
         "php": ">=5.6",
         "beatswitch/lock": "^0.2.0",
-        "illuminate/auth": "~5.3.0",
-        "illuminate/database": "~5.3.0",
-        "illuminate/support": "~5.3.0"
+        "illuminate/auth": "~5.4.0",
+        "illuminate/database": "~5.4.0",
+        "illuminate/support": "~5.4.0"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.3.2",
