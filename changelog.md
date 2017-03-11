@@ -2,6 +2,12 @@
 
 All notable changes to Lock - Laravel will be documented in this file. This file follows the *[Keep a CHANGELOG](http://keepachangelog.com/)* standards.
 
+## 0.5.1 - 2017-03-11
+
+## Added
+
+- Laravel 5.4 support
+
 ## 0.5.0 - 2016-12-18
 
 ## Added
